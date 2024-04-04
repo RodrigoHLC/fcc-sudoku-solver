@@ -7,7 +7,7 @@ module.exports = function (app) {
 
   app.route('/api/check')
     .post((req, res) => {
-      res.json(solver.checkPlacement(req.body.puzzle, req.body.coordinate.toUpperCase(), req.body.value));
+      res.json(solver.checkPlacement(req.body.puzzle, req.body.coordinate, req.body.value));
       // res.json(solver.checkRowPlacement(req.body.puzzle));
     });
     
