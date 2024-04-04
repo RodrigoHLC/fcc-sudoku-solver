@@ -157,9 +157,9 @@ class SudokuSolver {
       return { error : "Invalid value" }
     }
     // 3) CHECK IF TILE IS ALREADY TAKEN
-    if(takenTiles.includes(coord)){
+    if(takenTiles.includes(coord.toUpperCase())){
       // FIND OUT INDEX OF COORDINATE IN STRING
-      let indexStartingPoint = coord[0]=="A"? 1 : coord[0]=="B"? 10 : coord[0]=="C"? 19 : coord[0]=="D"? 28 : coord[0]=="E"? 37 : coord[0]=="F"? 46 : coord[0]=="G"? 55 : coord[0]=="H"? 64 : 73;
+      let indexStartingPoint = coord[0].toUpperCase()=="A"? 1 : coord[0].toUpperCase()=="B"? 10 : coord[0].toUpperCase()=="C"? 19 : coord[0].toUpperCase()=="D"? 28 : coord[0].toUpperCase()=="E"? 37 : coord[0].toUpperCase()=="F"? 46 : coord[0].toUpperCase()=="G"? 55 : coord[0].toUpperCase()=="H"? 64 : 73;
       let coordIndex = indexStartingPoint+parseInt(coord[1])-1;
       // IF IT'S TAKEN BY THE SAME NUMBER AS THE USER INPUT, RETURN "VALID"
       if( puzzleString[coordIndex-1] == value){
@@ -169,7 +169,7 @@ class SudokuSolver {
       return { error: "tile already in use"}
     }
     // IF TILE WAS AVAILABLE, CHECK FOR CONFLICTS
-    let tileRow = coord[0];
+    let tileRow = coord[0].toUpperCase();
     let tileCol = parseInt(coord[1]);
     let tileRegion =  (/[ABC]/i.test(tileRow) ? 0 : /[DEF]/i.test(tileRow) ? 3 : 6) + Math.ceil(tileCol/3)
     let number = eval(`num${value}`);
