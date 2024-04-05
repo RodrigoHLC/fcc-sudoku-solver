@@ -124,7 +124,7 @@ class SudokuSolver {
     // console.log(overallArr)
     let noDuplicates = overallArr.every( subArr => subArr.every( num => subArr.indexOf(num) == subArr.lastIndexOf(num) ) );
     if( ! noDuplicates ){
-      console.log("Can't be solved")
+      // console.log("Can't be solved")
       return { error: "Puzzle cannot be solved"}
     }
     // IF EVERYTHING IS CORRECT, CARRY ON
@@ -136,7 +136,6 @@ class SudokuSolver {
       return { error: 'Required field(s) missing' }
     }
     // 2) CHECK IF PUZZLE CAN BE SOLVED
-    // return this.validate(puzzleString);
     if(this.validate(puzzleString)){
       return this.validate(puzzleString);
     };
@@ -176,10 +175,10 @@ class SudokuSolver {
     let conflicts = [];
     let conflictFlag = false;
     // CHECK FOR ROW CONFLICTS
-    console.log(number);
+    // console.log(number);
     // console.log(tileRow);
-    console.log(tileCol);
-    console.log(number.rows.includes(tileRow))
+    // console.log(tileCol);
+    // console.log(number.rows.includes(tileRow))
 
     if( number.rows.includes(tileRow) ){
       conflicts.push("row");
@@ -197,10 +196,10 @@ class SudokuSolver {
     };
     // IF THERE WAS A CONFLICT
     if(conflictFlag){
-      console.log({"valid": false, "conflict": conflicts})
+      // console.log({"valid": false, "conflict": conflicts})
       return {"valid": false, "conflict": conflicts}
     } else {
-      console.log({"valid":true})
+      // console.log({"valid":true})
       return {"valid":true}
     }
 
@@ -224,7 +223,7 @@ class SudokuSolver {
       return this.validate(puzzleString);
     };
     // IF STRING IS VALID, PROCEED:
-    console.time("TotalTime");
+    // console.time("TotalTime");
     str = "X"+puzzleString;
     let oldString;
     let newString;
@@ -233,9 +232,9 @@ class SudokuSolver {
     let possibleValues = [];
     // AS LONG AS THERE ARE PERIODS IN THE STRING, IT'S NECESSARY TO WORK ON IT
   while(/\./.test(puzzleString)){
-    console.log(1);
+    // console.log(1);
     // LOOP THROUG EVERY PERIOD
-    console.log("Start loop")
+    // console.log("Start loop")
     oldString = str;
     newString = oldString; // IN CASE THERE ARE *NO* ONE-DEFINITIVE-ANSWER TILES
     for( let index = 1 ; index <= 81 ; index++){
@@ -246,12 +245,12 @@ class SudokuSolver {
           row =  letters[ Math.ceil(index / 9) ];
           col =  index<=9 ? index : index%9 == 0 ? 9 : index%9 ;
           region =  (index<=27 ? 0 : index<=54 ? 3 : 6) + Math.ceil(col/3);
-          // region = (/[ABC]/i.test(row) ? 0 : /[DEF]/i.test(row) ? 3 : 6) + Math.ceil(col/3);  // ALTERNATIVE WAY
+          // region = (/[ABC]/i.test(row) ? 0 : /[DEF]/i.test(row) ? 3 : 6) + Math.ceil(col/3);  // OTHER WAY
           // TAKE NOTE OF ITS INDEX
           periodIndex = index;
           // RESET possibleValues IN CASE IT'S BEEN USED BEFORE
           possibleValues = [];
-          console.log(2, "working on: ",index);
+          // console.log(2, "working on: ",index);
           
           // LOOP THROUGH POSSIBLE SOLUTIONS (1-9) FOR THIS PERIOD/EMPTY TILE
           for (let x = 1 ; x<=9 ; x++){
@@ -272,17 +271,17 @@ class SudokuSolver {
             // IF NO CONFLICT:
             // ADD THE CURRENT SOLUTION TO THE ARRAY OF POSSIBLE SOLUTIONS:
             possibleValues.push(x);
-            console.log("Possible values:", possibleValues);
+            // console.log("Possible values:", possibleValues);
             // IF THERE'S MORE THAN ONE POSSIBLE SOLUTION, BREAK THIS LOOP AND MOVE ON TO NEXT PERIOD IN THE STRING
             if(possibleValues.length > 1){
               // STORE OLD STRING VALUE
-              console.log("No unique solution now. Moving to next index:");
+              // console.log("No unique solution now. Moving to next index:");
               break
             }; 
           } // END OF LOOPING THROUGH POSSIBLE SOLUTIONS
           // IF  LOOPING FROM 1-9 ONLY FOUND ONE POSSIBLE SOLUTION, THAT –HAS— TO BE THE SOLUTION TO THAT TILE
           if( possibleValues.length == 1){
-            console.log(`Index #${index} solved!`);
+            // console.log(`Index #${index} solved!`);
             // ADD IT TO takenTiles
             takenTiles.push(`${row}${col}`);
             // STORE OLD STRING VALUE
@@ -302,37 +301,34 @@ class SudokuSolver {
             numberObj.cols.push(col); 
             numberObj.regions.push(region);
             // possibleValues = []; //JUST IN CASE
-            console.log("old string: ", oldString)
-            console.log("new string: ", newString)
+            // console.log("old string: ", oldString)
+            // console.log("new string: ", newString)
             
             // IF ALL PERIODS HAVE BEEN SOLVED:
             if( /^X[1-9]+$/.test(newString)){
               // RETURN SOLUTION REMOVING INITIAL 'X'
-              console.log( `Sudoku solved! Solution: ${newString.slice(1)}` );
-              console.log("First block")
-              console.timeEnd("TotalTime")
+              // console.log( `Sudoku solved! Solution: ${newString.slice(1)}` );
+              // console.log("First block")
+              // console.timeEnd("TotalTime")
               return {"solution": newString.slice(1)}
-              // return { error: "Puzzle cannot be solved"}
             }
           }
       }   
     } // END OF LOOPING THROUGH EVERY PERIOD
-    console.log("--------- L O O P   E N D E D ---------");
+    // console.log("--------- L O O P   E N D E D ---------");
     // IF END STRING DOESN'T CHANGE FROM ONE LOOP TO ANOTHER
     if(oldString == newString){
       //  ---- B R E A K    W H I L E   L O O P  ? ? ? ----
       //  ---- B R E A K    W H I L E   L O O P  ? ? ? ----
-      console.log("--------- NO CHANGES DURING LAST FULL RUN ---------")
+      // console.log("--------- NO CHANGES DURING LAST FULL RUN ---------")
       console.log("--------- W H I L E   L O O P   B R O K E N ---------");
-      console.log("--------- Time to start guessing ---------");
-      console.log("old string: ", oldString)
-      console.log("new string: ", newString);
+      // console.log("--------- Time to start guessing ---------");
+      // console.log("old string: ", oldString)
+      // console.log("new string: ", newString);
       break //BREAK WHILE LOOP 
     }
   } // WHILE LOOP END
 
-
-      // return;
       // LOOP THROUGH STRING AND STORE PERIOD(.) INDEX AND POSSIBLE SOLUTIONS
       console.log("Get possibilites:");
       let multipleSolutionsArr = ["X"]; // FORMAT: [ "X", [INDEX, SOL1, SOL2, ETC.],[INDEX, SOL1, SOL2, ETC.]... ]
@@ -376,25 +372,20 @@ class SudokuSolver {
           multipleSolutionsArr[multipleSolutionsArr.length-1]=multipleSolutionsArr[multipleSolutionsArr.length-1].concat(possibleValues)
         }   
       } // END OF LOOPING THROUGH EVERY PERIOD
-      console.log(multipleSolutionsArr);
+      // console.log(multipleSolutionsArr);
       let conflicts = false;
-      let skip = 0;
       let skipObject = {};
       let oldStringsObj = {};
-      let objects = {num1, num2, num3, num4, num5, num6, num7, num8, num9};
       let goBackFlags = {};
       // START CHECKING FOR EVERY POSSIBILITY
       // ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓ ↓
-      let val =0;
       // LOOP BETWEEN SUBARRAYS
       for( let i = 1 ; i <= multipleSolutionsArr.length-1 ; i++ ){
-        // console.log("Loop through arrays, i: "+i+", skip: "+skip+", val: "+val)
 
         // LOOP WITHIN SUB-ARRAY OF POSSIBLE SOLUTIONS
-        for( let x = 1+val ; x <= multipleSolutionsArr[i].length-1; x++ ){
+        for( let x = 1 ; x <= multipleSolutionsArr[i].length-1; x++ ){
           let index = multipleSolutionsArr[i][0];
           // console.log("Working index: ",index);
-          
 
           // ---- E X P E R I M E N T ----
           // LOAD PREVIOUS START INDEX, IF ANY
@@ -406,16 +397,12 @@ class SudokuSolver {
             // DELETE DATA THIS LOOP HAD PREVIOUSLY ADDED TO num#
             // console.log(`Going back one full array`);
             numberObj = eval(`num${multipleSolutionsArr[i][multipleSolutionsArr[i].length-1]}`);
-            // console.log(`numberObj.rows: `, numberObj.rows);
             numberObj.rows.pop(row);
             numberObj.cols.pop(col);
             numberObj.regions.pop(region);
-            // console.log(`numberObj.rows: `, numberObj.rows);
-            // console.log(`numberObj.cols: `, numberObj.cols);
-            // console.log(`numberObj.regions: `, numberObj.regions);
-            
             // SET goBack TO FALSE, SO WE START FROM 0 NEXT TIME THIS ARRAY IS TRIED
             goBackFlags[`goBack${index}`] = false;
+            // console.log(`goBack${index} set to: `, goBackFlags[`goBack${index}`]);
             // SET SKIP TO 0, SO WE START FROM 0 NEXT TIME THIS ARRAY IS TRIED
             skipObject[`skip${index}`] = 0; //REDUNDANT, ALREADY 0
             // GO BACK TO PREVIOUS ARRAY
@@ -426,14 +413,10 @@ class SudokuSolver {
             // DELETE DATA THIS LOOP HAD PREVIOUSLY ADDED TO num#
             // console.log(`Going back one partial array`);
             numberObj = eval(`num${multipleSolutionsArr[i][x-1]}`);
-            // console.log(`numberObj.rows: `, numberObj.rows);
             numberObj.rows.pop(row);
             numberObj.cols.pop(col);
             numberObj.regions.pop(region);
             // console.log(`numObj: `, numberObj.Number)
-            // console.log(`numberObj.rows: `, numberObj.rows);
-            // console.log(`numberObj.cols: `, numberObj.cols);
-            // console.log(`numberObj.regions: `, numberObj.regions);
             // RESET WORKING STRING TO PREVIOUSLY UN-ALTERED STRING
             oldString = oldStringsObj[`oldStr${index}`];
             // console.log(`Restoring oldString${index}: `, oldString);
@@ -442,16 +425,13 @@ class SudokuSolver {
           }
           // ---- E X P E R I M E N T ----
 
+
           // GET ROW/COL/REGION DATA
           row = letters[ Math.ceil(index / 9) ];
           col = index<=9 ? index : index%9 == 0 ? 9 : index%9 ;
           region = (index<=27 ? 0 : index<=54 ? 3 : 6) + Math.ceil(col/3);
           // CHECK FOR CONFLICTS
           number = eval(`num${multipleSolutionsArr[i][x]}`);
-          // console.log(`Checking for conflicts against number: ${number.Number}`)
-          // console.log(`Rows: ${number.rows}`)
-          // console.log(`Cols: ${number.cols}`)
-          // console.log(`Regions: ${number.regions}`)
           if(number.rows.includes(row)){ conflicts = true };
           if(number.cols.includes(col)){ conflicts = true };
           if(number.regions.includes(region)){ conflicts = true };
@@ -463,8 +443,7 @@ class SudokuSolver {
             conflicts=false;
             // RESTORE STRING TO PREVIOUS STATE
             newString = oldString;
-          // console.log("old2: ", oldString);
-          console.log("new : ", newString);
+          // console.log("new : ", newString);
             // MAKE SURE PREVIOUS SUB-ARRAY STARTS FROM NEXT POSSIBLE SOLUTION, NOT THE SAME
             skipObject[`skip${index}`] = 0;
             goBackFlags[`goBack${index}`] = false // BECAUSE NOTHING WAS ADDED TO NUM# OBJECTS
@@ -480,7 +459,6 @@ class SudokuSolver {
             // TRY NEXT NUMBER WITHIN SUB-ARRAY
             continue
           }
-          // else{
           // IF NO CONFLICTS, ADD TO OBJECTS, MOVE TO NEXT SUBARRAY
           // console.log("This one passes. Do stuff.");
           numberObj = eval(`num${multipleSolutionsArr[i][x]}`);
@@ -490,13 +468,9 @@ class SudokuSolver {
           // RESET conflicts VARIABLE TO false
           conflicts=false;
           // DO STRING THINGS
-          // console.log("old1: ", oldString);
           oldString = newString;
-          // console.log("old2: ", oldString);
           // STORE UN-ALTERED STRING
           oldStringsObj[`oldStr${index}`] = oldString;
-          // console.log(`oldString: `, oldString);
-          // console.log(`oldStr${index}: `, oldStringsObj[`oldStr${index}`]);
           // ADD TO STRING
           newString = oldString.slice(0,index) + multipleSolutionsArr[i][x] + oldString.slice(index+1);
           if(!/\./.test(newString)){
@@ -504,21 +478,22 @@ class SudokuSolver {
             console.timeEnd("TotalTime")
             return
           }
-          console.log("new : ", newString);
+          // console.log("new : ", newString);
           // STORE LAST USED INDEX IN CASE NEXT ARRAY NEEDS TO COME BACK
-          // eval(`let skip{index} = x`)  // MY IDEA — — NOT RECOMMENDED!!
           skipObject[`skip${index}`] = x; // SAFER SUGGESTION FROM CHATGPT
           // MARK AS PASSED
           goBackFlags[`goBack${index}`] = true;
           // IF IT'S THE LAST NUMBER IN THE SUB-ARRAY, skipIndex NEEDS TO RESET TO 0
           if(x == multipleSolutionsArr[i].length-1){
             skipObject[`skip${index}`] = 0;
-            // goBackFlags[`goBack${index}`] = true;
           }
           // MOVE TO NEXT SUB-ARRAY, NOT NEXT NUMBER IN THIS ARRAY
           break;
       }
+  
   }
+  return {"solution": newString.slice(1)}
+
   }
 }
 module.exports = SudokuSolver;
