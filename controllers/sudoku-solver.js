@@ -10,6 +10,11 @@ let letters = "0ABCDEFGHI";
 let str;
 let numberObj;
 let canBeSolved;
+// let document = document;
+// document.addEventListener("DOMContentLoaded", () => {
+  // const textArea = document.getElementById("text-input");
+// });
+
 
 class SudokuSolver {
 
@@ -223,7 +228,7 @@ class SudokuSolver {
       return this.validate(puzzleString);
     };
     // IF STRING IS VALID, PROCEED:
-    // console.time("TotalTime");
+    console.time("TotalTime");
     str = "X"+puzzleString;
     let oldString;
     let newString;
@@ -290,9 +295,7 @@ class SudokuSolver {
             newString = str.slice(0, [periodIndex])+possibleValues[0]+str.slice([periodIndex+1]);
             // UPDATE str FOR NEXT ITERATION:
             str = newString;
-            // - - - - I M P O R T A N T - - - -
-            // - - - - I M P O R T A N T - - - -
-            // document.getElementById("text-input").value = newString;
+            
             
             // SELECT WHICH num# OBJECT VARIABLE TO USE
             numberObj = eval(`num${possibleValues[0]}`);
@@ -309,8 +312,13 @@ class SudokuSolver {
               // RETURN SOLUTION REMOVING INITIAL 'X'
               // console.log( `Sudoku solved! Solution: ${newString.slice(1)}` );
               // console.log("First block")
-              // console.timeEnd("TotalTime")
+
+              // ↓ ↓ ↓ ↓ ↓ ↓ SUDOKU SOLVED ↓ ↓ ↓ ↓ ↓ ↓ ↓ 
+              // ↓ ↓ ↓ ↓ ↓ ↓ SUDOKU SOLVED ↓ ↓ ↓ ↓ ↓ ↓ ↓ 
+              console.timeEnd("TotalTime")
               return {"solution": newString.slice(1)}
+              // ↑ ↑ ↑ ↑ ↑ ↑ SUDOKU SOLVED ↑ ↑ ↑ ↑ ↑ ↑ ↑ 
+              // ↑ ↑ ↑ ↑ ↑ ↑ SUDOKU SOLVED ↑ ↑ ↑ ↑ ↑ ↑ ↑ 
             }
           }
       }   
@@ -474,11 +482,16 @@ class SudokuSolver {
           // ADD TO STRING
           newString = oldString.slice(0,index) + multipleSolutionsArr[i][x] + oldString.slice(index+1);
           if(!/\./.test(newString)){
+
+            // ↓ ↓ ↓ ↓ ↓ ↓ SUDOKU SOLVED ↓ ↓ ↓ ↓ ↓ ↓ ↓ 
+            // ↓ ↓ ↓ ↓ ↓ ↓ SUDOKU SOLVED ↓ ↓ ↓ ↓ ↓ ↓ ↓ 
             console.log("Sudoku with no clear tiles solved! Answer: ",newString.slice(1));
             console.timeEnd("TotalTime")
-            return
+            return {"solution": newString.slice(1)}
+            // ↑ ↑ ↑ ↑ ↑ ↑ SUDOKU SOLVED ↑ ↑ ↑ ↑ ↑ ↑ ↑ 
+            // ↑ ↑ ↑ ↑ ↑ ↑ SUDOKU SOLVED ↑ ↑ ↑ ↑ ↑ ↑ ↑ 
           }
-          // console.log("new : ", newString);
+          console.log("new : ", newString);
           // STORE LAST USED INDEX IN CASE NEXT ARRAY NEEDS TO COME BACK
           skipObject[`skip${index}`] = x; // SAFER SUGGESTION FROM CHATGPT
           // MARK AS PASSED
@@ -492,9 +505,8 @@ class SudokuSolver {
       }
   
   }
-  return {"solution": newString.slice(1)}
+  // return {"solution": newString.slice(1)}
 
   }
 }
 module.exports = SudokuSolver;
-
