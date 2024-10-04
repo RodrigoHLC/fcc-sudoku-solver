@@ -34,11 +34,12 @@ If you wanna see this process in action, open your VS Code terminal and enter "n
 
 On the VSCode terminal, you will see all the possible combinations the string tries, going right as new tiles are worked on, and going left as it hits dead-ends and previously completed tiles need to be redone, trying from lower to highest (naturally, the last digits grow much more quickly than the first digits), and most importantly, you will see how many steps back the app can go without the whole thing crashing. This particular string will take a few seconds to solve which, again, I know is not optimal performance, but it's a good showcase of what I've been able to build.
 
-This other string also goes through the same process, but it needs to try less combinations before finding the answer, so it lets you see on your terminal, at around the 4th and 5th log, the moment in which the program realizes that none of the remaining empty tiles have a single possible solution, and that it's time to try multiple combinations through trial and error.
+This other string also goes through the same process, but it needs to try less combinations before finding the answer, so it lets you see on your terminal, at around the 4th and 5th log, the moment in which the program realizes that none of the remaining empty tiles have a single possible solution, and that it's time to try multiple combinations through trial and error:
 
 ..32....6....4..9.1.2...5..7...29....4.3.7.5....81...2..1...8.3.2..8....9....46..
 
-Here's another hard string that will take a few seconds to solve.
+
+And here's one more hard string that will take a few seconds to solve:
 
 ..9..5.1.85.4..............1.........9.....6.62.71...9..............4.37.4.3..6..
 
