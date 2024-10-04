@@ -305,7 +305,7 @@ class SudokuSolver {
             numberObj.regions.push(region);
             // possibleValues = []; //JUST IN CASE
             // console.log("old string: ", oldString)
-            // console.log("new string: ", newString)
+            console.log("new string: ", newString)  // ◘ ◘ THIS WILL DISPLAY ON THE TERMINAL EVERY STRING THE PROGRAM TRIES
             
             // IF ALL PERIODS HAVE BEEN SOLVED:
             if( /^X[1-9]+$/.test(newString)){
@@ -329,8 +329,8 @@ class SudokuSolver {
       //  ---- B R E A K    W H I L E   L O O P  ? ? ? ----
       //  ---- B R E A K    W H I L E   L O O P  ? ? ? ----
       // console.log("--------- NO CHANGES DURING LAST FULL RUN ---------")
-      console.log("--------- W H I L E   L O O P   B R O K E N ---------");
-      // console.log("--------- Time to start guessing ---------");
+      console.log(" ◘--------- W H I L E   L O O P   B R O K E N ---------◘ ");
+      console.log(" ◘ No unique possible answers for remaining tiles. Gotta start trying different combinations back and forth ◘");
       // console.log("old string: ", oldString)
       // console.log("new string: ", newString);
       break //BREAK WHILE LOOP 
